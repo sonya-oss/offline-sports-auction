@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Offline Sports Auction</title><link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand-mark">OA</div><div><div class="brand">OFFLINE <span>AUCTION</span></div><div class="tagline">SPORTS • FRIENDS • BIDDING</div></div><div class="offline"><i></i> ONLINE ROOMS</div></header>
+<main class="wrap">
+<section class="hero"><div class="eyebrow">YOUR ROOM. YOUR RULES.</div><h1>Build your dream team.<br><span>Win the auction.</span></h1><p>Create a sports auction room and invite friends anywhere using a room code. Internet is required for live multiplayer.</p></section>
+<div id="notice" class="notice hidden"></div>
+<section id="home" class="home-grid">
+  <article class="panel create-panel"><div class="panel-kicker">01 / HOST</div><h2>Create a room</h2><p class="muted">Set the sport, budget and player pool.</p>
+    <form id="createForm">
+      <label>Your name<input id="hostName" maxlength="24" required placeholder="e.g. Shree"></label>
+      <label>Choose sport<select id="sport"><option>Cricket</option><option>Kabaddi</option><option>Football</option><option>Custom</option></select></label>
+      <div class="two"><label>Budget per team<input id="budget" type="number" min="1" value="10000" required></label><label>Bid increment<input id="increment" type="number" min="1" value="100" required></label></div>
+      <button class="btn primary" type="submit">Create auction room <b>↗</b></button>
+    </form>
+  </article>
+  <article class="panel join-panel"><div class="panel-kicker">02 / PARTICIPANT</div><h2>Join a room</h2><p class="muted">Enter the code shared by your host.</p>
+    <form id="joinForm"><label>Room code<input id="joinCode" maxlength="6" required placeholder="ABC123" class="code-input"></label><label>Your name<input id="joinName" maxlength="24" required placeholder="Your name"></label><label>Team name<input id="joinTeam" maxlength="24" required placeholder="e.g. Thunder XI"></label><button class="btn secondary" type="submit">Join auction <b>→</b></button></form>
+  </article>
+</section>
+<section id="lobby" class="hidden">
+  <div class="room-head panel"><div><div class="panel-kicker">ROOM CREATED</div><h2 id="roomTitle">Auction room</h2><p class="muted" id="roomSubtitle"></p></div><div class="room-code-wrap"><span>ROOM CODE</span><strong id="roomCode">------</strong><button id="copyLink" class="btn tiny">Copy invite link</button></div></div>
+  <div class="main-grid">
+    <article class="panel" id="hostSetup"><div class="section-head"><div><div class="panel-kicker">HOST CONTROL</div><h2>Player pool</h2></div><span class="count" id="playerCount">0 players</span></div>
+      <div id="hostTeamSetup" class="host-team-setup"><div class="list-title">YOUR TEAM</div><form id="hostTeamForm"><label>Host name<input id="hostTeamName" maxlength="24" placeholder="Your name" required></label><label>Your team name<input id="hostTeamNameTeam" maxlength="24" placeholder="e.g. Thunder XI" required></label><button class="btn secondary" type="submit">Add my team</button></form></div><form id="playerForm"><label>Player name<input id="playerName" maxlength="40" required placeholder="Player name"></label><div class="two"><label>Role<select id="playerRole"></select></label><label>Base price<input id="basePrice" type="number" min="0" value="100" required></label></div><button class="btn secondary" type="submit">+ Add player</button></form>
+      <div class="list-title">ADDED PLAYERS</div><div id="setupPlayers" class="player-list empty">Add your first player above.</div>
+      <button id="startAuction" class="btn primary full">Start auction <b>→</b></button>
+    </article>
+    <aside class="panel"><div class="section-head"><div><div class="panel-kicker">PARTICIPANTS</div><h2>Teams in room</h2></div><span id="teamCount" class="count">0 teams</span></div><p class="muted small">Share the public app link and room code. Friends can join from any location with internet access.</p><div id="teamsList" class="team-list empty">Waiting for friends to join…</div><div class="tip"><b>Host tip</b><br>The online server must stay available throughout the auction.</div></aside>
+  </div>
+</section>
+<section id="auction" class="hidden">
+  <div class="auction-bar"><div><div class="panel-kicker">LIVE AUCTION</div><h2 id="auctionSport">CRICKET AUCTION</h2></div><div class="room-code-mini">ROOM <b id="auctionCode"></b></div></div>
+  <div class="auction-grid">
+    <article class="panel current-card"><div class="live-line"><span class="live-dot"></span><span id="auctionStatus">AUCTION LIVE</span><span id="playerProgress" class="progress"></span></div><div class="player-symbol" id="playerSymbol">🏏</div><div id="playerRoleBadge" class="role-badge">BATTER</div><h1 id="currentPlayer">Waiting…</h1><div class="price-label">CURRENT BID</div><div class="current-price" id="currentPrice">₹0</div><div class="bid-meta"><div><span>BASE PRICE</span><b id="baseDisplay">₹0</b></div><div><span>MIN. INCREMENT</span><b id="incrementDisplay">₹0</b></div></div><div id="highestBidder" class="highest-bidder">No bids yet</div><div id="bidActions" class="bid-actions"><button id="bidButton" class="btn primary">Place bid <b>↗</b></button></div><div id="hostActions" class="host-actions hidden"><button id="closeBidding" class="btn secondary">Close bidding / Mark unsold</button><button id="nextPlayer" class="btn primary">Next player →</button></div></article>
+    <aside class="stack"><article class="panel"><div class="section-head"><div><div class="panel-kicker">LIVE</div><h2>Teams & budgets</h2></div></div><div id="liveTeams" class="team-list"></div></article><article class="panel"><div class="section-head"><div><div class="panel-kicker">ACTIVITY</div><h2>Auction feed</h2></div></div><p id="activity" class="activity">The auction will appear here.</p></article></aside>
+  </div>
+  <article class="panel results-panel"><div class="section-head"><div><div class="panel-kicker">SQUAD TRACKER</div><h2>Players & results</h2></div><span id="resultCount" class="count"></span></div><div id="resultsList" class="results-grid"></div></article>
+</section>
+<footer><span>OFFLINE SPORTS AUCTION</span><span>V1.1 · GLOBAL MULTIPLAYER PROTOTYPE</span></footer>
+</main>
+<script src="/static/app.js"></script>
+</body></html>
